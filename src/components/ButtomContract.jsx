@@ -5,10 +5,10 @@ const ButtonContract = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-15 right-8 z-50 flex flex-col items-start gap-3">
+    <div className="fixed bottom-10 right-8 z-50 flex flex-col items-start gap-3">
       {isOpen && (
         <div className="flex flex-col gap-3">
-          <a href="mailto:example@email.com" className="bg-red-500 p-3 rounded-full text-white shadow-lg hover:scale-110 transition">
+          <a href="mailto:power.modular@gmail.com" className="bg-red-500 p-3 rounded-full text-white shadow-lg hover:scale-110 transition">
             <FaEnvelope size={20} />
           </a>
           <a href="https://maps.google.com?q=Your+Location" target="_blank" className="bg-green-500 p-3 rounded-full text-white shadow-lg hover:scale-110 transition">

@@ -44,13 +44,15 @@ const Footer = () => {
               { to: "/", label: "หน้าเเรก" },
               { to: "/about", label: "เกี่ยวกับเรา" },
               { to: "/product", label: "สินค้า" },
+              { to: "/certificate", label: "ใบประกาศ" },
+
               { to: "/project", label: "โปรเจกต์" },
               { to: "/csr", label: "ช่วยเหลือสังคม (CSR)" },
             ].map((item, index) => (
               <li key={index}>
                 <Link
                   to={item.to}
-                  className="relative flex items-center text-gray-300 hover:text-yellow-500 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-yellow-500 after:transition-all after:duration-700 hover:after:w-full"
+                  className="relative flex items-center text-gray-300 hover:text-yellow-500 transition-colors after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-yellow-500 after:transition-all after:duration-1000 hover:after:w-full"
                 >
                   <ChevronRight className="mr-2 flex-shrink-0" size={12} />
                   <span>{item.label}</span>
@@ -97,12 +99,7 @@ const Footer = () => {
             >
               นโยบายความเป็นส่วนตัว
             </Link>
-            <Link
-              to="/terms"
-              className="relative hover:text-yellow-500 after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:w-0 after:h-[2px] after:bg-yellow-500 after:transition-all after:duration-700 hover:after:w-full"
-            >
-              เงื่อนไขการให้บริการ
-            </Link>
+           
           </div>
         </div>
       </div>

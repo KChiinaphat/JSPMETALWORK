@@ -39,7 +39,7 @@ const Navbar = () => {
               to="/certificate"
               className="relative hover:text-yellow-600 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-yellow-600 after:transition-all after:duration-300 hover:after:w-full"
             >
-              เกี่ยวกับเรา
+              ใบประกาศ
             </Link>
           </li>
           <li>
