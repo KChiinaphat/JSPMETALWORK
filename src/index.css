@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+:root {
+  --green-primary: #16423C;
+  --green-secondary: #6A9C89;
+  --green-soft: #C4DAD2;
+  --green-bg: #E9EFEC;
+  --accent-orange: #FAFFCA;
+  --base-light: #F5F5F5;
+}
+
+/* Optional: fallback utility classes for custom color usage outside Tailwind */
+.bg-green-primary { background-color: var(--green-primary); }
+.bg-green-secondary { background-color: var(--green-secondary); }
+.bg-green-soft { background-color: var(--green-soft); }
+.bg-green-bg { background-color: var(--green-bg); }
+.bg-accent-orange { background-color: var(--accent-orange); }
+.bg-base-light { background-color: var(--base-light); }
+
+.text-green-primary { color: var(--green-primary); }
+.text-green-secondary { color: var(--green-secondary); }
+.text-green-soft { color: var(--green-soft); }
+.text-green-bg { color: var(--green-bg); }
+.text-accent-orange { color: var(--accent-orange); }
+.text-base-light { color: var(--base-light); }
+

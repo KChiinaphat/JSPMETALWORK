@@ -1,0 +1,216 @@
+import { useState } from 'react';
+import { FaPhone, FaEnvelope, FaBuilding, FaUser, FaMapMarkerAlt, FaHeadset } from 'react-icons/fa';
+
+const Contact = () => {
+    const [formData, setFormData] = useState({
+        email: '',
+        phone: '',
+        firstName: '',
+        lastName: '',
+        company: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+        setSubmitted(true);
+
+        // Optional: ล้างฟอร์มหลังส่ง
+        setFormData({
+            email: '',
+            phone: '',
+            firstName: '',
+            lastName: '',
+            company: ''
+        });
+    };
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+        setSubmitted(false); // Reset state ถ้าผู้ใช้แก้ไขข้อมูล
+    };
+
+    return (
+        <div className="min-h-screen bg-gradient-to-b from-base-light to-white">
+  {/* Hero Section */}
+  <div className="bg-green-primary text-white py-16 shadow-2xl">
+    <div className="container mx-auto px-4 max-w-4xl text-center">
+      <FaHeadset className="mx-auto text-5xl mb-6 animate-bounce text-accent-orange" />
+      <h1 className="text-4xl font-bold mb-4">ติดต่อเรา</h1>
+      <p className="text-xl text-green-bg">เรายินดีให้คำปรึกษาและช่วยเหลือคุณ</p>
+    </div>
+  </div>
+
+
+            <div className="container mx-auto px-4 py-8 -mt-5 ">
+                <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    {/* Contact Form */}
+                    <div className="bg-white rounded-xl shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300 border border-green-soft/20">
+                        <h2 className="text-2xl font-semibold text-green-primary mb-6">ส่งข้อความถึงเรา</h2>
+
+                        {/* แสดงข้อความเมื่อส่งแล้ว */}
+                        {submitted && (
+                            <p className="text-green-600 font-medium mb-4">
+                                ✅ ส่งข้อความเรียบร้อยแล้ว! ขอบคุณที่ติดต่อเรา
+                            </p>
+                        )}
+
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="transform transition-all duration-300 hover:scale-[1.02]">
+                                    <label htmlFor="firstName" className="block text-green-primary mb-2 font-medium">ชื่อ</label>
+                                    <div className="relative group">
+                                        <span className="absolute left-3 top-3 text-green-secondary group-hover:text-accent-orange transition-colors">
+                                            <FaUser />
+                                        </span>
+                                        <input
+                                            type="text"
+                                            id="firstName"
+                                            name="firstName"
+                                            value={formData.firstName}
+                                            onChange={handleChange}
+                                            className="w-full pl-10 pr-3 py-2 rounded-lg border border-green-soft/30 focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-accent-orange/20 transition-all"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="transform transition-all duration-300 hover:scale-[1.02]">
+                                    <label htmlFor="lastName" className="block text-green-primary mb-2 font-medium">นามสกุล</label>
+                                    <div className="relative group">
+                                        <span className="absolute left-3 top-3 text-green-secondary group-hover:text-accent-orange transition-colors">
+                                            <FaUser />
+                                        </span>
+                                        <input
+                                            type="text"
+                                            id="lastName"
+                                            name="lastName"
+                                            value={formData.lastName}
+                                            onChange={handleChange}
+                                            className="w-full pl-10 pr-3 py-2 rounded-lg border border-green-soft/30 focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-accent-orange/20 transition-all"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label htmlFor="email" className="block text-green-primary mb-2">อีเมล</label>
+                                <div className="relative">
+                                    <span className="absolute left-3 top-3 text-green-secondary"><FaEnvelope /></span>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-3 py-2 rounded-lg border border-green-soft/30 focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-accent-orange/20 transition-all"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label htmlFor="phone" className="block text-green-primary mb-2">เบอร์โทรศัพท์</label>
+                                <div className="relative">
+                                    <span className="absolute left-3 top-3 text-green-secondary"><FaPhone /></span>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-3 py-2 rounded-lg border border-green-soft/30 focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-accent-orange/20 transition-all"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label htmlFor="company" className="block text-green-primary mb-2">บริษัท</label>
+                                <div className="relative">
+                                    <span className="absolute left-3 top-3 text-green-secondary"><FaBuilding /></span>
+                                    <input
+                                        type="text"
+                                        id="company"
+                                        name="company"
+                                        value={formData.company}
+                                        onChange={handleChange}
+                                        className="w-full pl-10 pr-3 py-2 rounded-lg border border-green-soft/30 focus:outline-none focus:border-accent-orange focus:ring-2 focus:ring-accent-orange/20 transition-all"
+                                    />
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={submitted}
+                                className={`w-full py-3 rounded-lg text-light-green font-medium shadow-lg transform hover:scale-[1.02] transition-all duration-300 ${
+                                    submitted
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-green-secondary hover:bg-accent-orange-dark'
+                                }`}
+                            >
+                                {submitted ? 'ส่งแล้ว' : 'ส่งข้อความ'}
+                            </button>
+                        </form>
+                    </div>
+
+                    {/* Map and Contact Info */}
+                    <div className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-green-soft/20">
+                        <div className="h-[400px] relative">
+                            <iframe
+                                title="Google Map"
+                                aria-label="ที่อยู่บริษัท"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5643068607524!2d100.27150867508902!3d13.684236586700644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e295918bd6c405%3A0xfdc11e38c47b1226!2z4Lie4Liy4Lin4LmA4Lin4Lit4Lij4LmM4Lit4Li14LmC4Lih4LiU4Li54Lil4Liy4Lij4LmMIOC4iOC4s-C4geC4seC4lA!5e0!3m2!1sth!2sth!4v1749608457071!5m2!1sth!2sth"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                            ></iframe>
+                        </div>
+                        <div className="p-8 bg-gradient-to-br from-white to-green-bg/20">
+                            <h2 className="text-2xl font-semibold text-green-primary mb-6">ข้อมูลการติดต่อ</h2>
+                            <div className="space-y-6">
+                                <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-green-soft/20">
+                                    <div className="bg-green-bg p-3 rounded-full">
+                                        <FaMapMarkerAlt className="text-green-primary text-xl" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-medium text-green-primary">ที่อยู่</h3>
+                                        <p className="text-green-secondary">M7MF+MJW ตำบล อ้อมน้อย อำเภอกระทุ่มแบน สมุทรสาคร 74130</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-green-soft/20">
+                                    <div className="bg-green-bg p-3 rounded-full">
+                                        <FaPhone className="text-green-primary text-xl" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-medium text-green-primary">โทรศัพท์</h3>
+                                        <p className="text-green-secondary">081-987-9729</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-green-soft/20">
+                                    <div className="bg-green-bg p-3 rounded-full">
+                                        <FaEnvelope className="text-green-primary text-xl" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-medium text-green-primary">อีเมล</h3>
+                                        <p className="text-green-secondary">jsp.metal2517@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Contact;
