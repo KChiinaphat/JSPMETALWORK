@@ -140,7 +140,7 @@ const ProductList = () => {
                     {product.category || 'อื่นๆ'}
                   </span>
                   {product.price && (
-                    <div className="text-accent-orange font-bold mt-1">
+                    <div className="text-green-primary font-bold mt-1">
                       ฿{product.price.toLocaleString()}
                     </div>
                   )}
@@ -149,7 +149,7 @@ const ProductList = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => window.open(`http://localhost:5000/uploads/${product.image}`, '_blank')}
-                  className="bg-accent-orange hover:bg-accent-orange-dark text-white px-3 py-1 rounded text-sm transition-colors"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
                 >
                   ดูรูป
                 </button>

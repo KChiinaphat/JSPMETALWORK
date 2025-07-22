@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const ProductPage = () => {
   const [category, setCategory] = useState("ตู้พาเนล");
@@ -12,18 +13,18 @@ const ProductPage = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:5000/api/products');
+        const res = await axios.get("http://localhost:5000/api/products");
         const categorized = res.data.reduce((acc, product) => {
-          const cat = product.category || 'other';
+          const cat = product.category || "other";
           if (!acc[cat]) acc[cat] = [];
           acc[cat].push(product);
           return acc;
         }, {});
         setProducts(categorized);
-        setError('');
+        setError("");
       } catch (err) {
         console.error(err);
-        setError('ไม่สามารถโหลดข้อมูลสินค้าได้');
+        setError("ไม่สามารถโหลดข้อมูลสินค้าได้");
       } finally {
         setLoading(false);
       }
@@ -51,14 +52,22 @@ const ProductPage = () => {
       {/* Category Selector */}
       <div className="flex justify-center space-x-4 mb-12">
         <button
-          onClick={() => setCategory('ตู้พาเนล')}
-          className={`px-4 py-2 rounded-lg font-medium transition ${category === 'ตู้พาเนล' ? 'bg-amber-100 text-green-primary' : 'bg-green-primary text-white hover:bg-green-secondary hover:text-black'}`}
+          onClick={() => setCategory("ตู้พาเนล")}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            category === "ตู้พาเนล"
+              ? "bg-amber-100 text-green-primary"
+              : "bg-green-primary text-white hover:bg-green-secondary hover:text-black"
+          }`}
         >
-          ตู้ไฟฟ้าชนิดตู้พาเเนล     
+          ตู้ไฟฟ้าชนิดตู้พาเเนล
         </button>
         <button
-          onClick={() => setCategory('ตู้เฟรม')}
-          className={`px-4 py-2 rounded-lg font-medium transition ${category === 'ตู้เฟรม' ? 'bg-amber-100  text-green-primary' : 'bg-green-primary text-white hover:bg-green-secondary hover:text-black'}`}  
+          onClick={() => setCategory("ตู้เฟรม")}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            category === "ตู้เฟรม"
+              ? "bg-amber-100  text-green-primary"
+              : "bg-green-primary text-white hover:bg-green-secondary hover:text-black"
+          }`}
         >
           ตู้ไฟฟ้าชนิดตู้เฟรม
         </button>
@@ -100,17 +109,24 @@ const ProductPage = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2 text-green-primary">{product.name}</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-green-primary">
+                      {product.name}
+                    </h3>
                     {product.description && (
-                      <p className="text-green-secondary mb-4">{product.description}</p>
+                      <p className="text-green-secondary mb-4">
+                        {product.description}
+                      </p>
                     )}
                     <div className="mt-4 flex justify-between items-center">
-                      <span className="text-accent-orange font-bold">
-                        ฿{product.price?.toLocaleString() || 'N/A'}
+                      <span className="text-emerald-400 font-bold">
+                        ฿{product.price?.toLocaleString() || "N/A"}
                       </span>
-                      <button className="px-4 py-2 bg-accent-orange hover:bg-accent-orange-dark text-white rounded-lg transition-colors duration-300">
+                      <Link
+                        to={`/product/${product._id}`}
+                        className="px-4 py-2 bg-emerald-400 hover:bg-emerald-500 text-white rounded-lg transition-colors duration-300"
+                      >
                         ดูรายละเอียด
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>

@@ -187,7 +187,7 @@ const CertificateForm = () => {
           className={`w-full py-2 px-4 rounded-md text-white font-medium ${
             loading
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-accent-orange hover:bg-accent-orange-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-orange'
+              : 'bg-green-500 hover:bg-accent-orange-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-orange'
           } transition-colors`}
         >
           {loading ? 'กำลังอัพโหลด...' : 'อัพโหลดใบประกาศ'}

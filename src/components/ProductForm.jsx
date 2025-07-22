@@ -6,7 +6,7 @@ const ProductForm = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('ตู้พาเนล');
-  const [image, setImage] = useState(null); // เปลี่ยนจาก imageUrl เป็น image เพื่อความชัดเจน
+  const [images, setImages] = useState([]); // ✅ รองรับหลายรูป
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -15,27 +15,27 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ตรวจสอบความครบถ้วน
-    if (!name || !description || !price || !category || !image) {
+    if (!name || !description || !price || !category || images.length === 0) {
       setError('กรุณากรอกข้อมูลให้ครบถ้วน');
       return;
     }
 
-    // ตรวจสอบราคา
     const priceValue = Number(price);
     if (isNaN(priceValue) || priceValue <= 0) {
       setError('กรุณากรอกราคาที่ถูกต้องและมากกว่า 0');
       return;
     }
 
-    // ตรวจสอบไฟล์รูปภาพ
-    if (!(image instanceof File) || !image.type.startsWith('image/')) {
-      setError('กรุณาอัปโหลดไฟล์รูปภาพที่ถูกต้อง');
-      return;
-    }
-    if (image.size > 5 * 1024 * 1024) {
-      setError('ไฟล์รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 5MB)');
-      return;
+    // ตรวจสอบรูปทุกไฟล์
+    for (const image of images) {
+      if (!(image instanceof File) || !image.type.startsWith('image/')) {
+        setError('กรุณาอัปโหลดไฟล์รูปภาพที่ถูกต้อง');
+        return;
+      }
+      if (image.size > 10 * 1024 * 1024) {
+        setError('ไฟล์รูปภาพมีขนาดใหญ่เกินไป (สูงสุด 10MB)');
+        return;
+      }
     }
 
     setLoading(true);
@@ -49,22 +49,18 @@ const ProductForm = () => {
       const formData = new FormData();
       formData.append('name', name);
       formData.append('description', description);
-      formData.append('price', priceValue);
+      formData.append('price', priceValue.toString());
       formData.append('category', category);
-      formData.append('image', image);
-
-      // ล็อก FormData เพื่อ debug
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}:`, value instanceof File ? value.name : value);
-      }
+      images.forEach((file) => {
+        formData.append('images', file); // ✅ ชื่อฟิลด์ตรงกับ backend
+      });
 
       const response = await axios.post('http://localhost:5000/api/products', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
         },
       });
-
-      console.log('Response จาก backend:', response.data);
 
       if (response.status === 201 || response.data.success) {
         setSuccess('เพิ่มสินค้าสำเร็จ');
@@ -72,28 +68,19 @@ const ProductForm = () => {
         setDescription('');
         setPrice('');
         setCategory('ตู้พาเนล');
-        setImage(null);
-        e.target.reset();
+        setImages([]);
+        e.target.reset(); // reset form
       } else {
         throw new Error(response.data.message || 'เกิดข้อผิดพลาดในการเพิ่มสินค้า');
       }
     } catch (error) {
-      console.error('ข้อผิดพลาดจากเซิร์ฟเวอร์:', JSON.stringify(error.response?.data, null, 2));
-      console.error('รายละเอียด error response:', JSON.stringify(error.response, null, 2));
-      if (error.response?.status === 401) {
-        setError('กรุณาเข้าสู่ระบบใหม่');
-        setTimeout(() => {
-          window.location.href = '/admin/login';
-        }, 2000);
-      } else {
-        setError(
-          error.response?.data?.message ||
-          error.response?.data?.error?.message ||
-          error.message ||
-          'เกิดข้อผิดพลาดในการเพิ่มสินค้า'
-        );
-      }
       console.error('Error adding product:', error);
+      setError(
+        error.response?.data?.message ||
+        error.response?.data?.error?.message ||
+        error.message ||
+        'เกิดข้อผิดพลาดในการเพิ่มสินค้า'
+      );
     } finally {
       setLoading(false);
     }
@@ -180,25 +167,33 @@ const ProductForm = () => {
         </div>
 
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-green-primary mb-1">
+          <label htmlFor="images" className="block text-sm font-medium text-green-primary mb-1">
             รูปภาพสินค้า
           </label>
           <input
             type="file"
-            id="image"
+            id="images"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            multiple
+            onChange={(e) => {
+              if (e.target.files) {
+                setImages(Array.from(e.target.files));
+              }
+            }}
             required
             className="w-full px-3 py-2 border border-green-soft/30 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-orange focus:border-accent-orange"
           />
-          <p className="mt-1 text-sm text-green-secondary">รองรับไฟล์รูปภาพขนาดไม่เกิน 5MB</p>
-          {image && (
-            <div className="mt-2">
-              <img
-                src={URL.createObjectURL(image)}
-                alt="Preview"
-                className="h-24 w-24 object-contain border rounded border-green-soft/30"
-              />
+          <p className="mt-1 text-sm text-green-secondary">เลือกรูปได้หลายรูป (สูงสุด 10MB/ไฟล์)</p>
+          {images.length > 0 && (
+            <div className="mt-2 flex gap-2 flex-wrap">
+              {images.map((file, index) => (
+                <img
+                  key={index}
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${index}`}
+                  className="h-24 w-24 object-contain border rounded border-green-soft/30"
+                />
+              ))}
             </div>
           )}
         </div>
@@ -209,7 +204,7 @@ const ProductForm = () => {
           className={`w-full py-2 px-4 rounded-md text-white font-medium ${
             loading
               ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-accent-orange hover:bg-accent-orange-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-orange'
+              : 'bg-green-500 hover:bg-green-sec-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-sec'
           } transition-colors`}
         >
           {loading ? 'กำลังเพิ่มสินค้า...' : 'เพิ่มสินค้า'}

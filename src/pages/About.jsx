@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import logo from "../assets/JSP_logo.png"; 
 import founder from "../assets/Aboutimg/founder.jpg";
-import heroBackground from "../assets/img/hero-bg.jpg"; // เพิ่ม import รูปพื้นหลัง
+import heroBackground from "../assets/img/hero-bg.jpg"; 
 import ImageSlideshow from '../components/ImageSlideshow';
 
 const images = [
@@ -17,28 +17,30 @@ const About = () => {
   const [current, setCurrent] = useState(0);
 
   return (
-    <main className="bg-base-light">
+    <main className="bg-base-light min-h-screen">
       {/* Hero Section */}
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="relative h-[60vh] flex items-center"
       >
+        
         <div 
-  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-  style={{
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${heroBackground})`
-  }}
-/>
-
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${heroBackground})`
+          }}
+        />
         <div className="absolute inset-0 bg-green-primary/60 backdrop-blur-sm"></div>
+
+        {/* Content */}
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <motion.img
             initial={{ y: -20 }}
             animate={{ y: 0 }}
             src={logo}
             alt="โลโก้ JSP Metal"
-            className="mx-auto mb-8 h-48"
+            className="mx-auto mb-8 h-48 max-w-xs"
           />
           <motion.h1 
             initial={{ y: 20 }}
@@ -51,11 +53,11 @@ const About = () => {
       </motion.section>
         
       {/* Quote Section */}
-      <section className="mt-20 py-20 bg-light-green rounded-1xl shadow-lg">
+      <section className="mt-20 py-20 bg-light-green rounded-2xl shadow-lg">
         <div className="container mx-auto px-4 max-w-4xl text-center">
-          <div className="text-2xl font-semibold mb-8 text-green-primary">
+          <h2 className="text-2xl font-semibold mb-8 text-green-primary">
             "ทำไมต้องเลือกเรา? ทำไมต้องตู้ควบคุมไฟฟ้าที่ได้มาตรฐาน?"
-          </div>
+          </h2>
           <div className="mb-8">
             <img
               src={founder}
@@ -72,32 +74,28 @@ const About = () => {
         </div>
       </section>
 
-     
-
-      {/* About Section */}
+      {/* About Text + Images */}
       <motion.section 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="py-20 bg-light-green rounded-1xl shadow-lg"
+        className="py-20 bg-light-green rounded-2xl shadow-lg"
       >
         <div className="container mx-auto px-4 flex flex-col md:flex-row gap-12">
           {/* Text Content */}
-          <div className="md:w-1/2 space-y-6 text-center">
+          <div className="md:w-1/2 space-y-6 text-center md:text-left">
             <div className="relative inline-block">
               <h2 className="text-4xl font-bold text-green-primary mb-6">เกี่ยวกับเรา</h2>
-              <div className="absolute -bottom-2 left-0 w-1/2 h-1 bg-green-secondary"></div>
+              <div className="absolute -bottom-2 left-0 w-1/2 h-1 bg-green-secondary rounded-full"></div>
             </div>
-            <p className="text-green-secondary leading-relaxed text-lg">
-              บริษัท JSP Metal จำกัด เป็นบริษัทที่เเยกตัวออกมาจาก พาวเวอร์อี โมดูลาร์ จำกัด 
-              เป็นบริษัทที่ทำการผลิตตู้ไฟฟ้าเปล่าคุณภาพสูง โดยมีประสบการณ์มากกว่า 5 ปีในอุตสาหกรรมนี้ 
-              เรามุ่งมั่นที่จะพัฒนาผลิตภัณฑ์ที่ตอบโจทย์ความต้องการของลูกค้า
+            <p className="text-gray-800 leading-relaxed text-lg">
+              บริษัท JSP Metal จำกัด เป็นบริษัทที่แยกตัวออกมาจาก พาวเวอร์อี โมดูลาร์ จำกัด 
+              ผลิตตู้ไฟฟ้าเปล่าคุณภาพสูงด้วยประสบการณ์กว่า 5 ปีในอุตสาหกรรมนี้ 
+              มุ่งมั่นพัฒนาผลิตภัณฑ์ที่ตอบโจทย์ความต้องการของลูกค้า
             </p>
-            <p className="text-green-secondary leading-relaxed text-lg">
-              เราใช้เทคโนโลยีและวัสดุที่มีคุณภาพสูงในการผลิตตู้ไฟฟ้าเปล่า 
-              เพื่อให้มั่นใจว่าผลิตภัณฑ์ของเรามีความทนทานและปลอดภัย 
-              ทีมงานของเราประกอบด้วยวิศวกรและช่างเทคนิคที่มีความเชี่ยวชาญในการออกแบบ
-              และผลิตตู้ไฟฟ้าเปล่าที่ได้มาตรฐานสากล
+            <p className="text-gray-800 leading-relaxed text-lg">
+              ใช้เทคโนโลยีและวัสดุคุณภาพสูงเพื่อความทนทานและปลอดภัย 
+              ทีมงานของเราคือวิศวกรและช่างเทคนิคเชี่ยวชาญในการออกแบบและผลิตตู้ไฟฟ้าเปล่ามาตรฐานสากล
             </p>
           </div>
 
@@ -105,15 +103,17 @@ const About = () => {
           <div className="md:w-1/2 space-y-6">
             <motion.img
               whileHover={{ scale: 1.02 }}
-              src="public/aboutimg/AboutUs_2-1-1024x768.jpg"
+              src="/aboutimg/AboutUs_2-1-1024x768.jpg"า่
               alt="การผลิตตู้ไฟฟ้า JSP Metal"
               className="rounded-lg shadow-lg w-full h-[300px] object-cover"
+              loading="lazy"
             />
             <motion.img
               whileHover={{ scale: 1.02 }}
-              src="public/aboutimg/AboutUs_1-1-1024x768.jpg"
+              src="/aboutimg/AboutUs_1-1-1024x768.jpg"
               alt="โรงงาน JSP Metal"
               className="rounded-lg shadow-lg w-full h-[300px] object-cover"
+              loading="lazy"
             />
           </div>
         </div>

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaEye, FaShoppingCart, FaSearch, FaStar } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 import { useTranslation } from "react-i18next";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-const ProductCard = ({ id, name, description, imageUrl, price, category }) => {
+const ProductCard = ({ _id, name, description, images = [], price, category }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { t } = useTranslation();
 
-  // Format price with commas
   const formattedPrice = new Intl.NumberFormat('th-TH').format(price);
 
   return (
@@ -16,8 +20,8 @@ const ProductCard = ({ id, name, description, imageUrl, price, category }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Container */}
-      <div className="relative overflow-hidden h-64">
+      {/* Image Slider */}
+      <div className="relative h-64 overflow-hidden bg-transparent">
         {/* Category Badge */}
         {category && (
           <div className="absolute top-4 left-4 z-10">
@@ -26,22 +30,41 @@ const ProductCard = ({ id, name, description, imageUrl, price, category }) => {
             </span>
           </div>
         )}
-        
-        {/* Product Image */}
-        <img 
-          src={imageUrl} 
-          alt={name} 
-          className={`w-full h-full object-cover transition-transform duration-700 ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`} 
-        />
-        
-        {/* Overlay */}
+
+        {/* Swiper or Fallback */}
+        {images.length > 0 ? (
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            loop={true}
+            className="h-64 bg-transparent"
+          >
+            {images.map((img, idx) => (
+              <SwiperSlide key={idx}>
+                <img
+                  src={img.url}
+                  alt={`${name} - ${idx + 1}`}
+                  className={`h-64 w-full object-contain bg-transparent transition-transform duration-500 ${
+                    isHovered ? 'scale-105' : 'scale-100'
+                  }`}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <div className="h-64 flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
+            ไม่มีรูปภาพ
+          </div>
+        )}
+
+        {/* Hover Overlay */}
         <div className={`absolute inset-0 bg-green-primary/50 flex items-center justify-center gap-3 transition-opacity duration-300 ${
           isHovered ? 'opacity-100' : 'opacity-0'
         }`}>
           <Link 
-            to={`/products/${id}`} 
+            to={`/product/${_id}`} 
             className="w-10 h-10 rounded-full bg-white text-green-primary flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
             title={t("view", "View details")}
           >
@@ -50,25 +73,20 @@ const ProductCard = ({ id, name, description, imageUrl, price, category }) => {
         </div>
       </div>
 
-      {/* Content */}
+      {/* Product Content */}
       <div className="p-5 flex flex-col flex-grow">
-
-
-        {/* Product Name */}
         <h3 className="text-lg font-semibold text-green-primary mb-2 hover:text-accent-orange transition-colors">
-          <Link to={`/products/${id}`}>
+          <Link to={`/product/${_id}`}>
             {name}
           </Link>
         </h3>
 
-        {/* Description */}
         <p className="text-sm text-green-secondary mb-4 line-clamp-2 flex-grow">{description}</p>
 
-        {/* Price and Button Row */}
         <div className="mt-auto flex items-center justify-between">
           <p className="text-xl font-bold text-green-primary">{formattedPrice} บาท</p>
           <Link 
-            to={`/products/${id}`}
+            to={`/product/${_id}`}
             className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium transition-all bg-accent-orange rounded-lg hover:bg-accent-orange-dark group"
           >
             <span className="absolute inset-0 flex items-center justify-center w-full h-full text-green-primary duration-300 translate-x-full group-hover:translate-x-0 ease">

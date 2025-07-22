@@ -14,6 +14,7 @@ import AdminPage from './pages/admin/AdminPage';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
+import ProductDetail from './pages/ProductDetail';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
     
           
           {/* Protected Admin Route */}

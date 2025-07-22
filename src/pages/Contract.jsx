@@ -16,7 +16,7 @@ const Contract = () => {
                     <ul className="space-y-6 text-base">
                         <li className="flex items-start gap-4">
                             <span className="font-semibold min-w-[100px] text-green-primary">ที่อยู่:</span>
-                            <span className="text-green-secondary">M7MF+MJW ตำบล อ้อมน้อย อำเภอกระทุ่มแบน สมุทรสาคร 74130</span>
+                            <span className="text-green-secondary">JSP เลขที่ 11/43 หมู่ที่ 1 ตำบลอ้อมน้อย ตำบลอ้อมน้อย อำเภอกระทุ่มแบน จังหวัดสมุทรสาคร 74130</span>
                         </li>
                         <li className="flex items-center gap-4">
                             <span className="font-semibold min-w-[100px] text-green-primary">โทรศัพท์:</span>

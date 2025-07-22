@@ -138,7 +138,7 @@ const CertificateList = () => {
                   href={cert.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-accent-orange hover:bg-accent-orange-dark text-white px-3 py-1 rounded text-sm transition-colors"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
                 >
                   ดูไฟล์
                 </a>

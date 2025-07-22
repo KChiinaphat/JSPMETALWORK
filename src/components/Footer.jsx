@@ -1,13 +1,10 @@
 import {
-  Facebook,
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-  ChevronRight
+  Facebook
 } from "lucide-react";
 import { motion } from "framer-motion";
 import logo from "../assets/JSP_logo.png";
+import { Link } from "react-router-dom";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,20 +14,35 @@ const Footer = () => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="bg-green-primary text-green-bg"
+      className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 shadow-md rounded-t-2xl"
     >
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         
         {/* Company Info */}
         <div>
-          <img
-            src={logo}
-            alt="JSP Logo"
-            className="h-16 w-16 object-cover rounded-lg cursor-pointer"
-            onDoubleClick={() => (window.location.href = "/login")}
-          />
-          <p className="mt-4 text-sm leading-relaxed text-green-bg">
+          <Link to="/" className="group">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-3"
+            >
+              <img 
+                src={logo} 
+                alt="JSP Logo" 
+                className="w-10 h-10 rounded-lg shadow-lg object-cover"
+                onDoubleClick={() => (window.location.href = "/login")}
+              />
+              <div className="hidden sm:block">
+                <h1 className="text-xl font-bold text-white transition-colors">
+                  JSP Company
+                </h1>
+                <p className="text-sm text-emerald-100 transition-colors">
+                  ผลิตตู้ไฟฟ้าเปล่าคุณภาพสูง
+                </p>
+              </div>
+            </motion.div>
+          </Link>
+          <p className="mt-4 text-sm leading-relaxed text-white/90">
             บริษัท JSP METAL WORKS CO.,LTD เป็นผู้เชี่ยวชาญในการผลิตตู้ไฟฟ้าเปล่าคุณภาพสูง มากกว่า 5 ปี
             เรามุ่งมั่นพัฒนาผลิตภัณฑ์ที่ตอบโจทย์ความต้องการของลูกค้า ด้วยมาตรฐานและคุณภาพระดับสากล
           </p>
@@ -40,16 +52,16 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="hover:text-accent-orange transition-transform transform hover:scale-110"
+              className="text-white hover:text-accent-orange transition-transform transform hover:scale-110"
             >
-              <Facebook size={20} />
+              <Facebook size={24} strokeWidth={2.2} />
             </a>
           </div>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-green-bg font-semibold mb-4">ลิงค์ด่วน</h3>
+          <h3 className="text-white font-semibold mb-4 text-lg">ลิงค์ด่วน</h3>
           <ul className="space-y-3 text-sm">
             {[
               { href: "/", label: "หน้าเเรก" },
@@ -62,9 +74,9 @@ const Footer = () => {
               <li key={index}>
                 <a
                   href={item.href}
-                  className="group relative flex items-center text-green-bg hover:text-accent-orange transition-all duration-300"
+                  className="group relative flex items-center text-white hover:text-accent-orange transition-all duration-300 font-medium"
                 >
-                  <ChevronRight className="mr-2 flex-shrink-0" size={12} />
+                  <span className="mr-2 h-2 w-2 rounded-full bg-white group-hover:bg-accent-orange transition-all duration-300" />
                   <span className="relative">
                     {item.label}
                     <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-accent-orange transition-all duration-500 group-hover:w-full" />
@@ -77,42 +89,65 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-green-bg font-semibold mb-4">ติดต่อ</h3>
-          <ul className="space-y-4 text-sm">
-            <li className="flex items-start gap-3">
-              <MapPin className="text-green-bg mt-1" size={16} />
-              <span>M7MF+MJW ตำบล อ้อมน้อย อำเภอกระทุ่มแบน สมุทรสาคร 74130</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone className="text-green-bg" size={16} />
-              <a href="tel:+66819879729" className="hover:text-accent-orange transition-colors transform hover:scale-105">
-                081-987-9729
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail className="text-green-bg" size={16} />
-              <a href="mailto:jsp.metal2517@gmail.com" className="hover:text-accent-orange transition-colors transform hover:scale-105">
-                jsp.metal2517@gmail.com
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Clock className="text-green-bg" size={16} />
-              <span>จันทร์ - เสาร์, 08:00 - 17:00 น.</span>
-            </li>
-          </ul>
+      <h3 className="text-white font-semibold mb-4 text-lg">ติดต่อ</h3>
+      <ul className="space-y-4 text-sm">
+        <li className="flex items-start gap-3">
+          <MapPin className="text-white mt-1" size={18} />
+          <div className="text-white/90">
+            JSP เลขที่ 11/43 หมู่ที่ 1 ตำบลอ้อมน้อย ตำบลอ้อมน้อย อำเภอกระทุ่มแบน จังหวัดสมุทรสาคร 74130
+          </div>
+        </li>
+        <li className="flex items-center gap-3">
+          <Phone className="text-white" size={18} />
+          <a
+            href="tel:+66617671333"
+            className="text-white hover:text-accent-orange transition duration-200 transform hover:scale-105 font-medium"
+          >
+            06-1767-1333
+          </a>
+        </li>
+        <li className="flex items-center gap-3">
+          <Mail className="text-white" size={18} />
+          <a
+            href="mailto:jsp.metal2517@gmail.com"
+            className="text-white hover:text-accent-orange transition duration-200 transform hover:scale-105 font-medium"
+          >
+            jsp.metal2517@gmail.com
+          </a>
+        </li>
+        <li className="flex items-center gap-3">
+          <Clock className="text-white" size={18} />
+          <span className="text-white/90">จันทร์ - เสาร์, 08:00 - 17:00 น.</span>
+        </li>
+      </ul>
+    </div>
+        {/* Map (optional: สามารถใส่ Google Map หรือภาพแผนที่ย่อ) */}
+        <div className="hidden lg:block">
+          <div className="rounded-xl overflow-hidden shadow-md border border-white/30">
+            <iframe
+              title="JSP Location"
+              src="https://www.google.com/maps?q=13.698,100.325&z=15&output=embed"
+              width="100%"
+              height="160"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-green-secondary py-4">
+      <div className="border-t border-white/20 py-4 bg-white/10 rounded-b-2xl">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-green-bg">
+          <p className="text-sm text-white font-medium">
             © {currentYear} JSP METAL WORKS CO.,LTD. สงวนลิขสิทธิ์ทั้งหมด
           </p>
           <div className="mt-2 md:mt-0 flex space-x-6 text-sm">
             <a
               href="/privacy"
-              className="group relative text-green-bg hover:text-accent-orange transition-all duration-300"
+              className="group relative text-white hover:text-accent-orange transition-all duration-300 font-medium"
             >
               <span className="relative">
                 นโยบายความเป็นส่วนตัว
@@ -121,7 +156,7 @@ const Footer = () => {
             </a>
             <a
               href="/contact"
-              className="group relative text-green-bg hover:text-accent-orange transition-all duration-300"
+              className="group relative text-white hover:text-accent-orange transition-all duration-300 font-medium"
             >
               <span className="relative">
                 ติดต่อเรา
@@ -136,3 +171,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
