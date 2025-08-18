@@ -32,7 +32,7 @@ const CSR = () => {
       <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-green-primary text-white py-16"
+        className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 shadow-md rounded-t-2xl text-white py-16"
       >
         <div className="container mx-auto px-4 text-center">
           <motion.h1 

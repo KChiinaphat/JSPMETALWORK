@@ -1,33 +1,23 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import axios from "axios";
+import ProjectCard from "../components/ProjectCard";
 
 const Project = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "โครงการอาคารสำนักงานใหญ่",
-      description: "ติดตั้งตู้ควบคุมไฟฟ้าสำหรับอาคารสำนักงาน 20 ชั้น",
-      location: "กรุงเทพมหานคร",
-      year: "2023",
-      image: "https://via.placeholder.com/400x300?text=Office+Building"
-    },
-    {
-      id: 2,
-      title: "โรงงานอุตสาหกรรม",
-      description: "ระบบควบคุมไฟฟ้าสำหรับโรงงานผลิตอาหาร",
-      location: "สมุทรสาคร",
-      year: "2023",
-      image: "https://via.placeholder.com/400x300?text=Factory"
-    },
-    {
-      id: 3,
-      title: "ศูนย์การค้า",
-      description: "ตู้ควบคุมไฟฟ้าสำหรับศูนย์การค้าขนาดใหญ่",
-      location: "ชลบุรี",
-      year: "2022",
-      image: "https://via.placeholder.com/400x300?text=Shopping+Mall"
-    }
-  ];
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/projects');
+        console.log("Response data:", response.data);
+        setProjects(response.data);
+      } catch (error) {
+        console.error('ไม่สามารถดึงข้อมูลได้', error);
+      }
+    };
+    fetchProject();
+  }, []);
 
   return (
     <main className="py-12 px-4 sm:px-8 lg:px-16 bg-base-light">
@@ -48,31 +38,7 @@ const Project = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {projects.map((project, idx) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 border border-green-soft/20"
-          >
-            <div className="aspect-w-16 aspect-h-9 bg-green-bg/30">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-green-primary">{project.title}</h3>
-              <p className="text-green-secondary mb-4">{project.description}</p>
-              <div className="flex justify-between items-center text-sm text-green-secondary">
-                <span>{project.location}</span>
-                <span>{project.year}</span>
-              </div>
-            </div>
-          </motion.div>
+          <ProjectCard key={project._id} {...project} delay={idx * 0.1} />
         ))}
       </div>
     </main>

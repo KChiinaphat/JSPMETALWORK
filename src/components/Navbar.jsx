@@ -87,7 +87,7 @@ const Navbar = () => {
                       isScrolled ? "text-gray-800" : "text-white"
                     )}
                   >
-                    JSP Company
+                    JSP METAL WORKS CO., LTD. 
                   </h1>
                   <p
                     className={clsx(

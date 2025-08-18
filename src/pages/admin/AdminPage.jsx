@@ -4,6 +4,8 @@ import ProductForm from '../../components/ProductForm';
 import CertificateForm from '../../components/CertificateForm';
 import CertificateList from '../../components/CertificateList';
 import ProductList from '../../components/ProductList';
+import ProjectForm from '../../components/ProjectForm';
+import ProjectList from '../../components/ProjectList';
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -11,6 +13,8 @@ const AdminPage = () => {
   const [showCertificateForm, setShowCertificateForm] = useState(false);
   const [showProductList, setShowProductList] = useState(false);
   const [showCertificateList, setShowCertificateList] = useState(false);
+  const [showProjectForm, setShowProjectForm] = useState(false);
+  const [showProjectList, setShowProjectList] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -26,6 +30,61 @@ const AdminPage = () => {
     navigate('/');
   };
 
+  // ฟังก์ชัน reset toggle แสดงฟอร์มหรือ list ตัวอื่น ๆ
+  const resetAll = () => {
+    setShowProductForm(false);
+    setShowCertificateForm(false);
+    setShowProductList(false);
+    setShowCertificateList(false);
+    setShowProjectForm(false);
+    setShowProjectList(false);
+  };
+
+  // ฟังก์ชัน toggle ที่สามารถกดซ้ำเพื่อปิดได้
+  const toggleProductForm = () => {
+    if (showProductForm) resetAll();
+    else {
+      resetAll();
+      setShowProductForm(true);
+    }
+  };
+  const toggleCertificateForm = () => {
+    if (showCertificateForm) resetAll();
+    else {
+      resetAll();
+      setShowCertificateForm(true);
+    }
+  };
+  const toggleProductList = () => {
+    if (showProductList) resetAll();
+    else {
+      resetAll();
+      setShowProductList(true);
+    }
+  };
+  const toggleCertificateList = () => {
+    if (showCertificateList) resetAll();
+    else {
+      resetAll();
+      setShowCertificateList(true);
+    }
+  };
+  const toggleProjectForm = () => {
+    if (showProjectForm) resetAll();
+    else {
+      resetAll();
+      setShowProjectForm(true);
+    }
+  };
+  const toggleProjectList = () => {
+    if (showProjectList) resetAll();
+    else {
+      resetAll();
+      setShowProjectList(true);
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -39,58 +98,53 @@ const AdminPage = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
           <button
-            onClick={() => {
-              setShowProductForm(true);
-              setShowCertificateForm(false);
-              setShowProductList(false);
-              setShowCertificateList(false);
-            }}
+            onClick={toggleProductForm}
             className="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-lg shadow"
           >
             เพิ่มสินค้า
           </button>
           <button
-            onClick={() => {
-              setShowCertificateForm(true);
-              setShowProductForm(false);
-              setShowProductList(false);
-              setShowCertificateList(false);
-            }}
+            onClick={toggleCertificateForm}
             className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-lg shadow"
           >
             อัพโหลดใบประกาศ
           </button>
           <button
-            onClick={() => {
-              setShowProductList(true);
-              setShowProductForm(false);
-              setShowCertificateForm(false);
-              setShowCertificateList(false);
-            }}
+            onClick={toggleProductList}
             className="bg-purple-500 hover:bg-purple-600 text-white p-4 rounded-lg shadow"
           >
             แสดงสินค้าทั้งหมด
           </button>
           <button
-            onClick={() => {
-              setShowCertificateList(true);
-              setShowProductForm(false);
-              setShowCertificateForm(false);
-              setShowProductList(false);
-            }}
+            onClick={toggleCertificateList}
             className="bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-lg shadow"
           >
             แสดงใบประกาศทั้งหมด
           </button>
+          <button
+            onClick={toggleProjectForm}
+            className="bg-indigo-500 hover:bg-indigo-600 text-white p-4 rounded-lg shadow"
+          >
+            เพิ่มโปรเจกต์
+          </button>
+          <button
+            onClick={toggleProjectList}
+            className="bg-gray-500 hover:bg-gray-600 text-white p-4 rounded-lg shadow"
+          >
+            เเสดงโปรเจกต์ทั้งหมด
+          </button>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6 min-h-[300px]">
           {showProductForm && <ProductForm />}
           {showCertificateForm && <CertificateForm />}
           {showProductList && <ProductList />}
           {showCertificateList && <CertificateList />}
+          {showProjectForm && <ProjectForm />}
+          {showProjectList && <ProjectList />}
+          {/* ถ้าต้องการเพิ่ม loading, error display ที่นี่ ก็แจ้งได้นะครับ */}
         </div>
       </div>
     </div>

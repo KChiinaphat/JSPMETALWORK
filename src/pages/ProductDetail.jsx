@@ -45,7 +45,7 @@ const ProductDetail = () => {
   const handleInquiry = () => {
     const subject = encodeURIComponent(`สอบถามเกี่ยวกับ ${product.name}`);
     const body = encodeURIComponent(`สวัสดีครับ/ค่ะ\n\nต้องการสอบถามเกี่ยวกับผลิตภัณฑ์: ${product.name}\n\nรายละเอียดเพิ่มเติม:\n- `);
-    window.open(`mailto:info@yourcompany.com?subject=${subject}&body=${body}`, '_blank');
+    window.open(`mailto:jsp.metal2517@gmail.com?subject=${subject}&body=${body}`, '_blank');
   };
 
   // 📱 Share สินค้า
@@ -66,12 +66,7 @@ const ProductDetail = () => {
     }
   };
 
-  // 📄 ดาวน์โหลดแคตตาล็อก
-  const handleDownloadCatalog = () => {
-    // สมมติว่ามีไฟล์ PDF catalog
-    const catalogUrl = product.catalogUrl || '/catalogs/product-catalog.pdf';
-    window.open(catalogUrl, '_blank');
-  };
+
 
   // 🔄 Loading Component
   const LoadingSpinner = () => (
@@ -96,7 +91,7 @@ const ProductDetail = () => {
             ลองใหม่
           </button>
           <button
-            onClick={() => navigate('/products')}
+            onClick={() => navigate('/product')}
             className="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition"
           >
             กลับไปหน้าผลิตภัณฑ์
@@ -114,7 +109,7 @@ const ProductDetail = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-2">ไม่พบผลิตภัณฑ์</h2>
         <p className="text-gray-600 mb-6">ผลิตภัณฑ์ที่คุณค้นหาไม่มีอยู่ในระบบ</p>
         <Link
-          to="/products"
+          to="/product"
           className="inline-block px-6 py-2 bg-green-primary text-white rounded-lg hover:bg-green-600 transition"
         >
           ดูผลิตภัณฑ์ทั้งหมด
@@ -135,7 +130,7 @@ const ProductDetail = () => {
       <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
         <Link to="/" className="hover:text-green-primary">หน้าหลัก</Link>
         <span>›</span>
-        <Link to="/products" className="hover:text-green-primary">ผลิตภัณฑ์</Link>
+        <Link to="/product" className="hover:text-green-primary">ผลิตภัณฑ์</Link>
         <span>›</span>
         <span className="text-gray-800">{name}</span>
       </nav>
@@ -301,32 +296,22 @@ const ProductDetail = () => {
               </svg>
               <span>ติดต่อสอบถาม</span>
             </button>
-            
-            <button
-              onClick={handleDownloadCatalog}
-              className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition flex items-center justify-center space-x-2"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              <span>ดาวน์โหลดแคตตาล็อก</span>
-            </button>
           </div>
 
           {/* ข้อมูลบริษัท */}
           <div className="bg-gray-100 p-4 rounded-lg">
             <h4 className="font-semibold text-gray-800 mb-2">ผลิตโดย</h4>
             <p className="text-gray-600 text-sm">
-              บริษัท ชื่อบริษัทของคุณ จำกัด<br />
+              บริษัท jsp metals co. ltd จำกัด<br />
               โรงงานผลิตคุณภาพสูง มาตรฐาน ISO 9001:2015<br />
-              ติดต่อ: 02-XXX-XXXX | info@yourcompany.com
+              ติดต่อ: 06-1767-1333 | jsp.metal2517@gmail.com
             </p>
           </div>
 
           {/* Back Button */}
           <div className="pt-4">
             <Link
-              to="/products"
+              to="/product"
               className="inline-flex items-center space-x-2 text-gray-600 hover:text-green-primary transition"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

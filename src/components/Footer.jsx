@@ -17,7 +17,7 @@ const Footer = () => {
       className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 shadow-md rounded-t-2xl"
     >
       {/* Main Content */}
-      <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="container  mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         
         {/* Company Info */}
         <div>
@@ -34,7 +34,7 @@ const Footer = () => {
               />
               <div className="hidden sm:block">
                 <h1 className="text-xl font-bold text-white transition-colors">
-                  JSP Company
+                  JSP METAL WORKS CO., LTD.
                 </h1>
                 <p className="text-sm text-emerald-100 transition-colors">
                   ผลิตตู้ไฟฟ้าเปล่าคุณภาพสูง
@@ -92,7 +92,7 @@ const Footer = () => {
       <h3 className="text-white font-semibold mb-4 text-lg">ติดต่อ</h3>
       <ul className="space-y-4 text-sm">
         <li className="flex items-start gap-3">
-          <MapPin className="text-white mt-1" size={18} />
+          <MapPin className="text-white mt-1" size={36} />
           <div className="text-white/90">
             JSP เลขที่ 11/43 หมู่ที่ 1 ตำบลอ้อมน้อย ตำบลอ้อมน้อย อำเภอกระทุ่มแบน จังหวัดสมุทรสาคร 74130
           </div>
@@ -126,7 +126,7 @@ const Footer = () => {
           <div className="rounded-xl overflow-hidden shadow-md border border-white/30">
             <iframe
               title="JSP Location"
-              src="https://www.google.com/maps?q=13.698,100.325&z=15&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248097.05604252894!2d100.12586707699383!3d13.68713825205672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2bf421918aa03%3A0x38179a79948eed85!2z4Lia4Lij4Li04Lip4Lix4LiXIOC5gOC4iOC5gOC4reC4quC4nuC4tSDguYDguKHguJfguLHguKXguYDguKfguK3guKPguYzguIQg4LiI4Liz4LiB4Lix4LiU!5e0!3m2!1sth!2sth!4v1754551158151!5m2!1sth!2sth"
               width="100%"
               height="160"
               style={{ border: 0 }}

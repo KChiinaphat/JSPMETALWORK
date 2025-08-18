@@ -12,7 +12,7 @@ const ButtonContract = () => {
       label: "อีเมล"
     },
     {
-      href: "https://maps.google.com?q=M7MF+MJW+ตำบล+อ้อมน้อย+อำเภอกระทุ่มแบน+สมุทรสาคร+74130",
+      href: "https://maps.app.goo.gl/xGWsTjiz1icqKFqdA",
       icon: FaMapMarkerAlt,
       label: "แผนที่",
       target: "_blank"
