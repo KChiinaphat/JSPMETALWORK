@@ -98,21 +98,21 @@ const ProductCard = ({
         </p>
 
         <div className="mt-auto flex items-center justify-between">
-          <Link
-            to={`/project/${_id}`}
-            className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium transition-all bg-accent-orange rounded-lg hover:bg-accent-orange-dark group"
-          >
-            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-green-primary duration-300 translate-x-full group-hover:translate-x-0 ease">
-              <FaEye />
-            </span>
-            <span className="absolute flex items-center justify-center w-full h-full text-green-primary transition-all duration-300 transform group-hover:-translate-x-full ease">
-              {t("details", "รายละเอียด")}
-            </span>
-            <span className="relative invisible">
-              {t("details", "รายละเอียด")}
-            </span>
-          </Link>
-        </div>
+  <Link
+    to={`/project/${_id}`}
+    className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium transition-all bg-accent-orange rounded-lg hover:bg-accent-orange-dark group"
+  >
+    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-green-primary duration-300 translate-x-full group-hover:translate-x-0 ease">
+      <FaEye />
+    </span>
+    <span className="absolute flex items-center justify-center w-full h-full text-green-primary transition-all duration-300 transform group-hover:-translate-x-full ease">
+      {t("details", "รายละเอียด")}
+    </span>
+    <span className="relative invisible">
+      {t("details", "รายละเอียด")}
+    </span>
+  </Link>
+</div>
       </div>
     </div>
   );
