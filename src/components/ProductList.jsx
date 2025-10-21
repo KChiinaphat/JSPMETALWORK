@@ -148,7 +148,7 @@ const ProductList = () => {
               </div>
               <div className="flex gap-2">
                 <button
-                  onClick={() => window.open(`http://localhost:5000/uploads/${product.image}`, '_blank')}
+                  onClick={() => window.open(`${import.meta.env.VITE_API_URL}/uploads/${product.image}`, '_blank')}
                   className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition-colors"
                 >
                   ดูรูป

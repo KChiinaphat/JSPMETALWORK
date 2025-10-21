@@ -27,7 +27,7 @@ const Certificates = () => {
     const fetchCertificates = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:5000/api/certificates');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/certificates`);
         const categorized = res.data.reduce((acc, cert) => {
           const cat = cert.category || 'อื่น ๆ';
           if (!acc[cat]) acc[cat] = [];
@@ -76,6 +76,12 @@ const Certificates = () => {
           className={`px-4 py-2 rounded-lg font-medium transition ${category === 'เหล็ก' ? 'bg-accent-orange text-black' : 'bg-green-soft text-green-primary hover:bg-green-secondary hover:text-black'}`}
         >
           ใบรับรองงานเหล็ก
+        </button>
+        <button
+        onClick={() => setCategory('สถาบันไฟฟ้าและอิเล็กทรอนิกส์')}
+        className={`px-4 py-2 rounded-lg font-medium transition ${category === 'สถาบันไฟฟ้าและอิเล็กทรอนิกส์' ? 'bg-accent-orange text-black' : 'bg-green-soft text-green-primary hover:bg-green-secondary hover:text-black'}`}
+        >
+          ใบรับรองจากสถาบันไฟฟ้าเเละอิเล็กทรอนิกส์
         </button>
       </div>
 

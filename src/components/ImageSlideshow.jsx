@@ -1,10 +1,18 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 
 const ImageSlideshow = ({ images, current, setCurrent }) => {
   const nextSlide = () => setCurrent((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   const prevSlide = () => setCurrent((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   
+
+  useEffect(()=>{
+    const timer = setInterval(()=>{
+      nextSlide();
+    }, 5000);
+    return ()=> clearInterval(timer);
+  }, [current]);
   return (
     <div className="relative overflow-hidden rounded-lg shadow-2xl">
       <AnimatePresence mode="wait">

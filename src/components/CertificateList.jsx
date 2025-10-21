@@ -18,7 +18,7 @@ const CertificateList = () => {
         throw new Error('กรุณาเข้าสู่ระบบใหม่');
       }
 
-      let url = 'http://localhost:5000/api/certificates';
+      let url = `${import.meta.env.VITE_API_URL}/api/certificates`;
       if (filter !== 'ทั้งหมด') {
         url += `?category=${encodeURIComponent(filter)}`;
       }
@@ -61,7 +61,7 @@ const CertificateList = () => {
         throw new Error('กรุณาเข้าสู่ระบบใหม่');
       }
 
-      const response = await axios.delete(`http://localhost:5000/api/certificates/${id}`, {
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/certificates/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -108,6 +108,7 @@ const CertificateList = () => {
           <option value="ทั้งหมด">ทั้งหมด</option>
           <option value="สี">สี</option>
           <option value="เหล็ก">เหล็ก</option>
+          <option value="สถาบันไฟฟ้าและอิเล็กทรอนิกส์">สถาบันไฟฟ้าและอิเล็กทรอนิกส์</option>
           {/* เพิ่มหมวดอื่นๆ ได้ที่นี่ */}
         </select>
       </div>

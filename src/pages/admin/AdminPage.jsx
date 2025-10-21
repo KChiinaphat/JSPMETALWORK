@@ -6,6 +6,7 @@ import CertificateList from '../../components/CertificateList';
 import ProductList from '../../components/ProductList';
 import ProjectForm from '../../components/ProjectForm';
 import ProjectList from '../../components/ProjectList';
+import EditProduct from '../../components/EditProduct';
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const AdminPage = () => {
   const [showCertificateList, setShowCertificateList] = useState(false);
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [showProjectList, setShowProjectList] = useState(false);
+  const [showEditProduct, setShowEditProduct] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -38,6 +40,7 @@ const AdminPage = () => {
     setShowCertificateList(false);
     setShowProjectForm(false);
     setShowProjectList(false);
+    setShowEditProduct(false);
   };
 
   // ฟังก์ชัน toggle ที่สามารถกดซ้ำเพื่อปิดได้
@@ -81,6 +84,13 @@ const AdminPage = () => {
     else {
       resetAll();
       setShowProjectList(true);
+    }
+  };
+  const toggleEditProduct = () => {
+    if (showEditProduct) resetAll();
+    else {
+      resetAll();
+      setShowEditProduct(true);
     }
   };
 
@@ -135,6 +145,11 @@ const AdminPage = () => {
           >
             เเสดงโปรเจกต์ทั้งหมด
           </button>
+          <button
+            onClick={toggleEditProduct}
+            className="bg-amber-800 hover:bg-amber-950 text-white p-4 rounded-lg shadow">
+              แก้ไข้สิ้นค้ารายตัว
+            </button>
         </div>
 
         <div className="bg-white rounded-lg shadow p-6 min-h-[300px]">
@@ -144,6 +159,7 @@ const AdminPage = () => {
           {showCertificateList && <CertificateList />}
           {showProjectForm && <ProjectForm />}
           {showProjectList && <ProjectList />}
+          {showEditProduct&& <EditProduct/>}
           {/* ถ้าต้องการเพิ่ม loading, error display ที่นี่ ก็แจ้งได้นะครับ */}
         </div>
       </div>

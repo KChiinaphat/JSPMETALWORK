@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
-import logo from "../assets/JSP_Logo.png";
+import logo from "../assets/JSP_logo.png";
+import { useTranslation } from "react-i18next";
 
 const menuItems = [
   { to: "/", text: "หน้าหลัก", description: "กลับสู่หน้าแรก" },

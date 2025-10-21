@@ -25,7 +25,7 @@ const ProductCard = ({ _id, name, description, images = [], price, category }) =
         {/* Category Badge */}
         {category && (
           <div className="absolute top-4 left-4 z-10">
-            <span className="px-3 py-1 bg-accent-orange/80 text-white text-xs font-medium rounded-full backdrop-blur-sm">
+            <span className="px-3 py-1 bg-accent-orange/80 text-emerald-600 text-xs font-medium rounded-full backdrop-blur-sm">
               {category}
             </span>
           </div>
@@ -52,6 +52,29 @@ const ProductCard = ({ _id, name, description, images = [], price, category }) =
                 />
               </SwiperSlide>
             ))}
+
+            <style jsx global>{`
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #6b7280; /* เทาเรียบ */
+      width: 1.5rem; /* เล็กลง */
+      height: 1.5rem;
+      border-radius: 50%; /* ให้กลม */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 1.5rem; /* ขนาดไอคอน */
+    }
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+      background-color: rgba(107, 114, 128, 0.2); /* วงกลมสีเทาอ่อน */
+      color: #374151; /* เทาเข้มขึ้น */
+    }
+  `}</style>
           </Swiper>
         ) : (
           <div className="h-64 flex items-center justify-center bg-gray-100 text-gray-400 text-sm">

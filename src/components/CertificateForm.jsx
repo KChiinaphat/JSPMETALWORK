@@ -58,7 +58,7 @@ const CertificateForm = () => {
         throw new Error('กรุณาเข้าสู่ระบบใหม่');
       }
 
-      const response = await axios.post('http://localhost:5000/api/certificates', formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/certificates`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
@@ -136,6 +136,7 @@ const CertificateForm = () => {
           >
             <option value="สี">สี</option>
             <option value="เหล็ก">เหล็ก</option>
+            <option value="สถาบันไฟฟ้าและอิเล็กทรอนิกส์">สถาบันไฟฟ้าและอิเล็กทรอนิกส์</option>
           </select>
         </div>
 

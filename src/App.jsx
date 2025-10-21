@@ -16,6 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Unauthorized from './pages/Unauthorized';
 import ProductDetail from './pages/ProductDetail';
 import ProjectDetail from './pages/ProjectDetail';
+import ScrollToTop from './components/Scroltotop';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       {!hideLayout && <Navbar />}
       {!hideLayout && <ButtonContract />}
       <main className={`${hideLayout ? '' : 'container mx-auto px-4 py-8'}`}>
+        <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

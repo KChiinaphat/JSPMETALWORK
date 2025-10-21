@@ -33,7 +33,7 @@ const Contact = () => {
     setSubmitted(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/contract", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contract`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -96,15 +96,16 @@ const Contact = () => {
       )}
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-emerald-400 to-teal-400 text-white py-16 shadow-2xl">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <FaHeadset className="mx-auto text-5xl mb-6 animate-bounce text-orange-00" />
-          <h1 className="text-4xl font-bold mb-4">ติดต่อเรา</h1>
-          <p className="text-xl text-green-bg">
-            เรายินดีให้คำปรึกษาและช่วยเหลือคุณ
-          </p>
-        </div>
-      </div>
+     <div className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 text-white py-16 shadow-md">
+  <div className="container mx-auto px-4 max-w-4xl text-center">
+    <FaHeadset className="mx-auto text-5xl mb-6 animate-bounce text-white" />
+    <h1 className="text-4xl font-bold mb-4">ติดต่อเรา</h1>
+    <p className="text-xl text-white/90">
+      เรายินดีให้คำปรึกษาและช่วยเหลือคุณ
+    </p>
+  </div>
+</div>
+
 
       <div className="container mx-auto px-4 py-8 -mt-5 ">
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">

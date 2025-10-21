@@ -9,7 +9,7 @@ const Project = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/projects');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects` );
         console.log("Response data:", response.data);
         setProjects(response.data);
       } catch (error) {

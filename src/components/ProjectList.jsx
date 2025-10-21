@@ -19,7 +19,7 @@ const ProjectList = () => {
                 throw new Error('กรุณาเข้าสู่ระบบใหม่');
             }
 
-            let url = 'http://localhost:5000/api/projects';
+            let url = `${import.meta.env.VITE_API_URL}/api/projects`;
             if (filter !== 'ทั้งหมด') {
                 const categoryMap = {
                     'ตู้พาเนล':'ตู้พาเนล',

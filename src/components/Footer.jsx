@@ -1,6 +1,5 @@
-import {
-  Facebook
-} from "lucide-react";
+import { Facebook } from "lucide-react";
+import { SiLine } from "react-icons/si";
 import { motion } from "framer-motion";
 import logo from "../assets/JSP_logo.png";
 import { Link } from "react-router-dom";
@@ -17,7 +16,7 @@ const Footer = () => {
       className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 shadow-md rounded-t-2xl"
     >
       {/* Main Content */}
-      <div className="container  mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         
         {/* Company Info */}
         <div>
@@ -46,7 +45,10 @@ const Footer = () => {
             บริษัท JSP METAL WORKS CO.,LTD เป็นผู้เชี่ยวชาญในการผลิตตู้ไฟฟ้าเปล่าคุณภาพสูง มากกว่า 5 ปี
             เรามุ่งมั่นพัฒนาผลิตภัณฑ์ที่ตอบโจทย์ความต้องการของลูกค้า ด้วยมาตรฐานและคุณภาพระดับสากล
           </p>
+
+          {/* Social Icons */}
           <div className="mt-4 flex space-x-4">
+            {/* Facebook */}
             <a
               href="https://web.facebook.com/p/D-100051458839623"
               target="_blank"
@@ -55,6 +57,17 @@ const Footer = () => {
               className="text-white hover:text-accent-orange transition-transform transform hover:scale-110"
             >
               <Facebook size={24} strokeWidth={2.2} />
+            </a>
+
+            {/* LINE */}
+            <a
+              href="https://line.me/ti/p/mA7VhhHmaa" // 👉 เปลี่ยนเป็นลิงก์ LINE Official ของบริษัทคุณ
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LINE"
+              className="text-white hover:text-accent-orange transition-transform transform hover:scale-110"
+            >
+              <SiLine size={24} />
             </a>
           </div>
         </div>
@@ -89,39 +102,40 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div>
-      <h3 className="text-white font-semibold mb-4 text-lg">ติดต่อ</h3>
-      <ul className="space-y-4 text-sm">
-        <li className="flex items-start gap-3">
-          <MapPin className="text-white mt-1" size={36} />
-          <div className="text-white/90">
-            JSP เลขที่ 11/43 หมู่ที่ 1 ตำบลอ้อมน้อย ตำบลอ้อมน้อย อำเภอกระทุ่มแบน จังหวัดสมุทรสาคร 74130
-          </div>
-        </li>
-        <li className="flex items-center gap-3">
-          <Phone className="text-white" size={18} />
-          <a
-            href="tel:+66617671333"
-            className="text-white hover:text-accent-orange transition duration-200 transform hover:scale-105 font-medium"
-          >
-            06-1767-1333
-          </a>
-        </li>
-        <li className="flex items-center gap-3">
-          <Mail className="text-white" size={18} />
-          <a
-            href="mailto:jsp.metal2517@gmail.com"
-            className="text-white hover:text-accent-orange transition duration-200 transform hover:scale-105 font-medium"
-          >
-            jsp.metal2517@gmail.com
-          </a>
-        </li>
-        <li className="flex items-center gap-3">
-          <Clock className="text-white" size={18} />
-          <span className="text-white/90">จันทร์ - เสาร์, 08:00 - 17:00 น.</span>
-        </li>
-      </ul>
-    </div>
-        {/* Map (optional: สามารถใส่ Google Map หรือภาพแผนที่ย่อ) */}
+          <h3 className="text-white font-semibold mb-4 text-lg">ติดต่อ</h3>
+          <ul className="space-y-4 text-sm">
+            <li className="flex items-start gap-3">
+              <MapPin className="text-white mt-1" size={36} />
+              <div className="text-white/90">
+                JSP เลขที่ 11/43 หมู่ที่ 1 ตำบลอ้อมน้อย อำเภอกระทุ่มแบน จังหวัดสมุทรสาคร 74130
+              </div>
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone className="text-white" size={18} />
+              <a
+                href="tel:+66617671333"
+                className="text-white hover:text-accent-orange transition duration-200 transform hover:scale-105 font-medium"
+              >
+                06-1767-1333
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <Mail className="text-white" size={18} />
+              <a
+                href="mailto:jsp.metal2517@gmail.com"
+                className="text-white hover:text-accent-orange transition duration-200 transform hover:scale-105 font-medium"
+              >
+                jsp.metal2517@gmail.com
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <Clock className="text-white" size={18} />
+              <span className="text-white/90">จันทร์ - เสาร์, 08:00 - 17:00 น.</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Map */}
         <div className="hidden lg:block">
           <div className="rounded-xl overflow-hidden shadow-md border border-white/30">
             <iframe
@@ -171,4 +185,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

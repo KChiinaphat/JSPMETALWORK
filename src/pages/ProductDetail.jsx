@@ -20,13 +20,13 @@ const ProductDetail = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  // 🔁 โหลดสินค้าจาก backend
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
         setProduct(res.data);
       } catch (err) {
         console.error('เกิดข้อผิดพลาดในการโหลดสินค้า', err);
@@ -41,14 +41,13 @@ const ProductDetail = () => {
     }
   }, [id]);
 
-  // 📧 ติดต่อสอบถาม
+
   const handleInquiry = () => {
     const subject = encodeURIComponent(`สอบถามเกี่ยวกับ ${product.name}`);
     const body = encodeURIComponent(`สวัสดีครับ/ค่ะ\n\nต้องการสอบถามเกี่ยวกับผลิตภัณฑ์: ${product.name}\n\nรายละเอียดเพิ่มเติม:\n- `);
     window.open(`mailto:jsp.metal2517@gmail.com?subject=${subject}&body=${body}`, '_blank');
   };
 
-  // 📱 Share สินค้า
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -68,7 +67,7 @@ const ProductDetail = () => {
 
 
 
-  // 🔄 Loading Component
+
   const LoadingSpinner = () => (
     <div className="flex items-center justify-center min-h-screen">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-primary"></div>
@@ -76,7 +75,6 @@ const ProductDetail = () => {
     </div>
   );
 
-  // ❌ Error Component
   const ErrorMessage = ({ message }) => (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="text-center">
@@ -101,7 +99,6 @@ const ProductDetail = () => {
     </div>
   );
 
-  // 🚫 Product Not Found Component
   const ProductNotFound = () => (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="text-center">

@@ -13,7 +13,7 @@ const ProductPage = () => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:5000/api/products");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         const categorized = res.data.reduce((acc, product) => {
           const cat = product.category || "other";
           if (!acc[cat]) acc[cat] = [];
@@ -87,7 +87,7 @@ const ProductPage = () => {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
           >
             {products[category]?.length === 0 || !products[category] ? (
-              <p className="col-span-full text-center text-accent-orange text-lg">
+              <p className="col-span-full text-center text-red-700 text-lg">
                 ยังไม่มีสินค้าชนิดนี้
               </p>
             ) : (

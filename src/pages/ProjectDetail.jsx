@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Thumbs } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/thumbs';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -17,7 +11,6 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
@@ -25,7 +18,7 @@ const ProjectDetail = () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await axios.get(`http://localhost:5000/api/projects/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects/${id}`);
         setProject(res.data);
       } catch (err) {
         console.error('เกิดข้อผิดพลาดในการโหลดโปรเจกต์', err);
@@ -92,7 +85,7 @@ const ProjectDetail = () => {
   const { name, description, location, category, images } = project;
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 bg-white">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm text-gray-600 mb-6">
         <Link to="/" className="hover:text-green-primary">หน้าหลัก</Link>
@@ -102,79 +95,54 @@ const ProjectDetail = () => {
         <span className="text-gray-800">{name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
         {/* รูปภาพ */}
-        <div className="space-y-4">
-          {images && images.length > 0 ? (
-            <>
-              <div className="relative">
-                <Swiper
-                  modules={[Navigation, Pagination, Thumbs]}
-                  navigation
-                  pagination={{ clickable: true }}
-                  thumbs={{ swiper: thumbsSwiper }}
-                  loop
-                  className="rounded-xl overflow-hidden shadow-lg"
-                  onSlideChange={(swiper) => setSelectedImageIndex(swiper.realIndex)}
-                >
-                  {images.map((img, idx) => (
-                    <SwiperSlide key={idx}>
-                      <img
-                        src={img.url}
-                        alt={`${name}-${idx}`}
-                        className="w-full h-[500px] object-contain bg-white"
-                      />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-
-              {images.length > 1 && (
-                <Swiper
-                  onSwiper={setThumbsSwiper}
-                  spaceBetween={10}
-                  slidesPerView={4}
-                  freeMode
-                  watchSlidesProgress
-                  modules={[Thumbs]}
-                >
-                  {images.map((img, idx) => (
-                    <SwiperSlide key={idx}>
-                      <div
-                        className={`cursor-pointer rounded-lg overflow-hidden ${
-                          selectedImageIndex === idx ? 'ring-2 ring-green-primary' : ''
-                        }`}
-                      >
-                        <img
-                          src={img.url}
-                          alt={`${name}-thumb-${idx}`}
-                          className="w-full h-20 object-cover"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              )}
-            </>
-          ) : (
-            <div className="w-full h-[500px] bg-gray-100 flex items-center justify-center text-gray-500 rounded-xl">
-              <div className="text-center">
-                <div className="text-4xl mb-2">🏭</div>
-                <p>{t('no_image', 'ไม่มีรูปภาพ')}</p>
-              </div>
+        <div className="flex gap-4">
+          {/* Thumbnail แนวตั้ง */}
+          {images && images.length > 1 && (
+            <div className="flex flex-col gap-2 overflow-y-auto max-h-[500px]">
+              {images.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img.url}
+                  alt={`thumb-${idx}`}
+                  className={`w-20 h-20 object-cover rounded-lg cursor-pointer ${
+                    selectedImageIndex === idx ? 'ring-2 ring-green-primary' : ''
+                  }`}
+                  onClick={() => setSelectedImageIndex(idx)}
+                />
+              ))}
             </div>
           )}
+
+          {/* รูปใหญ่ */}
+          <div className="flex-1">
+            {images && images.length > 0 ? (
+              <img
+                src={images[selectedImageIndex].url}
+                alt={`main-${selectedImageIndex}`}
+                className="w-full h-[500px] object-contain rounded-xl"
+              />
+            ) : (
+              <div className="w-full h-[500px] bg-gray-100 flex items-center justify-center text-gray-500 rounded-xl">
+                <div className="text-center">
+                  <div className="text-4xl mb-2">🏭</div>
+                  <p>{t('no_image', 'ไม่มีรูปภาพ')}</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* รายละเอียดโปรเจกต์ */}
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-3">{name}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3">{name}</h1>
           {category && (
             <span className="inline-block mb-4 px-3 py-1 bg-gradient-to-r from-green-400 to-green-600 text-white text-sm rounded-full">
               {category}
             </span>
           )}
-          <p className="text-gray-600 leading-relaxed text-lg">{description}</p>
+          <p className="text-gray-600 leading-relaxed text-base sm:text-lg">{description}</p>
 
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-semibold text-gray-800 mb-2">สถานที่</h4>

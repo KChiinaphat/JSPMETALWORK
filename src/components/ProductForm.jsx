@@ -55,10 +55,10 @@ const ProductForm = () => {
         formData.append('images', file); // ✅ ชื่อฟิลด์ตรงกับ backend
       });
 
-      const response = await axios.post('http://localhost:5000/api/products', formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/products`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+          
         },
       });
 
@@ -173,6 +173,7 @@ const ProductForm = () => {
           <input
             type="file"
             id="images"
+            name="images"
             accept="image/*"
             multiple
             onChange={(e) => {
@@ -183,7 +184,7 @@ const ProductForm = () => {
             required
             className="w-full px-3 py-2 border border-green-soft/30 rounded-md focus:outline-none focus:ring-2 focus:ring-accent-orange focus:border-accent-orange"
           />
-          <p className="mt-1 text-sm text-green-secondary">เลือกรูปได้หลายรูป (สูงสุด 10MB/ไฟล์)</p>
+          <p className="mt-1 text-sm text-green-secondary">เลือกรูปได้ไม่เกิน20รูป (สูงสุด 10MB/ไฟล์)</p>
           {images.length > 0 && (
             <div className="mt-2 flex gap-2 flex-wrap">
               {images.map((file, index) => (
